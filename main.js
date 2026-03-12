@@ -11,5 +11,8 @@ const circle = new Konva.Circle({
   x: 250,
   y: 250,
   radius: 50,
-  fill: "red",
+  fill: "orange",
 });
+
+firstLayer.add(circle);
+stage.add(firstLayer);
