@@ -43,3 +43,60 @@ function drawNewCircle() {
 }
 
 circleButton.addEventListener("click", drawNewCircle);
+
+// ==============================================================================================
+
+// Drawing Feature
+// Feature Analysis
+//     1. User Goal
+//  Draw something. Make a mark, express creativity.
+//     2. Represented Model
+//  Cursor on the canvas | Defined canvas | Brush On | Brush Type Select | Colour? Its own feature?
+//     3. Behaviour (methodically how does it work?)
+//  move cursor over canvas, press mousebutton down, move mouse, release mousebutton
+//     4. Implemented Model (technically how does it work?)
+//  Konva Free Drawing Tutorial Code
+//  Create a new line when mousebutton down, add to that line when mouse moves.
+//     5. Interaction with other Features
+//  Colour | Images for Brush | Eraser | Uploaded Images
+
+// track when button is held
+// Boolean
+let isDrawing = false;
+let lastLine;
+
+// User presses mousebutton
+function drawMouseDown() {
+  isDrawing = true;
+  const pos = stage.getPointerPosition();
+  lastLine = new Konva.Line({
+    stroke: "cyan",
+    strokeWidth: 14,
+    lineCap: "round",
+    lineJoin: "round",
+    points: [pos.x, pos.y, pos.x, pos.y],
+  });
+  firstLayer.add(lastLine);
+}
+// add function to mousedown event
+stage.on("mousedown", drawMouseDown);
+
+// User moves their mouse
+function drawMouseMove() {
+  // don't run if NOT drawing
+  if (isDrawing === false) {
+    return;
+  }
+  // if isDrawing is TRUE
+  const pos = stage.getPointerPosition();
+  let newPoints = lastLine.points().concat([pos.x, pos.y]);
+  lastLine.points(newPoints);
+}
+stage.on("mousemove", drawMouseMove);
+
+// User releases mousebutton
+function drawMouseUp() {
+  isDrawing = false;
+}
+// stage.on("mouseup", drawMouseUp);
+window.addEventListener("mouseup", drawMouseUp);
