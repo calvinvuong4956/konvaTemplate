@@ -2,7 +2,7 @@ main {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  cursor: zoom-in;
+  cursor: wait;
 }
 
 .stageContainer {
