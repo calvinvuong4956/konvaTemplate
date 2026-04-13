@@ -100,3 +100,37 @@ function drawMouseUp() {
 }
 // stage.on("mouseup", drawMouseUp);
 window.addEventListener("mouseup", drawMouseUp);
+
+// ---------------------------------------------------------------------------------------
+// Import Image Function
+// HTML "File" Input
+// add image to konva as an image-object
+
+const imgUpload = document.getElementById("img-upload");
+// save last image
+let lastImageUploaded = null;
+
+// Function for saving/storing image
+function storeUploadedImage(e) {
+  lastImageUploaded = URL.createObjectURL(e.target.files[0]);
+  console.log(lastImageUploaded);
+  addImageURLToCanvas(lastImageUploaded);
+}
+imgUpload.addEventListener("change", storeUploadedImage);
+
+// Function for add image to Canvas
+function addImageURLToCanvas(url) {
+  const imgObject = new Image();
+  imgObject.onload = () => {
+    //this will run when image is loaded
+    const konvaImage = new Konva.Image({
+      x: stage.width() / 2 - imgObject.width / 2,
+      y: stage.height() / 2,
+      image: imgObject,
+      width: imgObject.width,
+      height: imgObject.height,
+    });
+    firstLayer.add(konvaImage);
+  };
+  imgObject.src = url;
+}
