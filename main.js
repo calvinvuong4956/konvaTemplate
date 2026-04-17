@@ -134,3 +134,5 @@ function addImageURLToCanvas(url) {
   };
   imgObject.src = url;
 }
+
+// REDO/UNDO Function
