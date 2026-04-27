@@ -9,3 +9,14 @@ main {
   background-color: blueviolet;
   flex: 1;
 }
+
+h1 {
+  font-size: 2rem;
+  font-style: italic;
+}
+
+@media (width >= 1000px) {
+  h1 {
+    font-size: 3rem;
+  }
+}

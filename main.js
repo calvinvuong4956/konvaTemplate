@@ -18,6 +18,14 @@ const stage = new Konva.Stage({
   height: stageContainerHeight,
 });
 
+// handles when users change the size of window
+function resizeHandler() {
+  stage.width(stageContainer.offsetWidth);
+  stage.height(stageContainer.offsetHeight);
+}
+// attach to resize event
+window.addEventListener("resize", resizeHandler);
+
 // create layer
 const firstLayer = new Konva.Layer();
 
